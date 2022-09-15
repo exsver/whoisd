@@ -1,0 +1,8 @@
+github.com/go-sql-driver/mysql v1.3.0 h1:pgwjLi/dvffoP9aabwkT3AKpXQM93QARkjFhDDqC1UE=
+github.com/go-sql-driver/mysql v1.3.0/go.mod h1:zAC/RDZ24gD3HViQzih4MyKcchzm+sOG5ZlKdlhCg5w=
+github.com/takama/daemon v0.0.0-20170906091552-ac5a22749fce h1:ECh/QySuQTBcZApzl9XrGQVQbHSFM+FkuY1025kVjPo=
+github.com/takama/daemon v0.0.0-20170906091552-ac5a22749fce/go.mod h1:So5Nv647d/sgbZNAfiWtw6egowH8vNNrPXAwooWeElk=
+golang.org/x/net v0.0.0-20170915142106-8351a756f30f h1:gBDN4vcizo3zTVoOZWdw1W3KB3Yh9lxB8I1uOgf/7n0=
+golang.org/x/net v0.0.0-20170915142106-8351a756f30f/go.mod h1:mL1N/T3taQHkDXs73rZJwtUhF3w3ftmwwsq0BUmARs4=
+golang.org/x/text v0.1.1-0.20170915090833-1cbadb444a80 h1:QfbDb2RQkRI2wdkeI7RuwRRLtivUM+917wtHZln6uCk=
+golang.org/x/text v0.1.1-0.20170915090833-1cbadb444a80/go.mod h1:NqM8EUOU14njkJ3fqMW+pc6Ldnwhi/IjpwHt7yyuwOQ=
