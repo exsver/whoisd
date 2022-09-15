@@ -44,7 +44,7 @@ func main() {
 		if err != nil {
 			buildTime = time.Now()
 		}
-		fmt.Println(daemonName, version.RELEASE, buildTime.Format(time.RFC1123))
+		fmt.Println(daemonName, version.RELEASE, buildTime.Format(time.RFC1123), version.REPO, version.COMMIT)
 		os.Exit(0)
 	}
 	status, err := daemon.Run()
