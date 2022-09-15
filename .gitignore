@@ -5,3 +5,4 @@ bin
 vendor
 .coverprofile
 coverage.txt
+cmd/whoisd
