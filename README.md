@@ -104,7 +104,9 @@ The config file should be in /etc/whoisd/whoisd.conf. Of course possible to load
     "password": "test",
     "indexBase": "whois",
     "typeTable": "domain"
-  }
+  },
+  "secondaryWhois": "",
+  "secondaryRegexp": ""
 }
 ```
 

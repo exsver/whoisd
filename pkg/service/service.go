@@ -90,7 +90,7 @@ func (service *Record) Run() (string, error) {
 
 	// init workers
 	for i := 0; i < service.Config.Workers; i++ {
-		go client.ProcessClient(channel, repository)
+		go client.ProcessClient(channel, repository, service.Config)
 	}
 
 	// This block is for testing purpose only
