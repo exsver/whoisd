@@ -29,6 +29,8 @@ const (
 	defaultStoragePassword = "test"
 	defaultIndexBase       = "whois"
 	defaultTypeTable       = "domain"
+        defaultSecondaryWhois  = ""
+        defaultSecondaryRegexp = ""
 )
 
 // Record - standard record (struct) for config package
@@ -53,6 +55,8 @@ type Record struct {
 		IndexBase   string
 		TypeTable   string
 	}
+        SecondaryWhois string
+        SecondaryRegexp string
 }
 
 // New - returns new config record initialized with default values
@@ -75,6 +79,8 @@ func New() *Record {
 	flag.StringVar(&config.Storage.Password, "spassword", defaultStoragePassword, "password of storage user")
 	flag.StringVar(&config.Storage.IndexBase, "base", defaultIndexBase, "storage index or database name")
 	flag.StringVar(&config.Storage.TypeTable, "table", defaultTypeTable, "storage type or table name")
+        flag.StringVar(&config.SecondaryWhois, "secondaryWhois", defaultSecondaryWhois, "host of the secondary whois server")
+        flag.StringVar(&config.SecondaryRegexp, "secondaryRegexp", defaultSecondaryRegexp, "match pattern for not found response from the secondary whois server")
 
 	return config
 }
@@ -110,6 +116,8 @@ func (config *Record) Load() (mapper.Bundle, error) {
 	flags.StringVar(&config.Storage.Password, "spassword", config.Storage.Password, "")
 	flags.StringVar(&config.Storage.IndexBase, "base", config.Storage.IndexBase, "")
 	flags.StringVar(&config.Storage.TypeTable, "table", config.Storage.TypeTable, "")
+        flags.StringVar(&config.SecondaryWhois, "secondaryWhois", config.SecondaryWhois, "")
+        flags.StringVar(&config.SecondaryRegexp, "secondaryRegexp", config.SecondaryRegexp, "")
 	flags.Parse(os.Args[1:])
 
 	return bundle, nil

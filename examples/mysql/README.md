@@ -28,7 +28,9 @@ Change the host to whatever hostname mysql is running on, as well as the databas
     "password": "yourpassword",
     "indexBase": "whois",
     "typeTable": "domain"
-  }
+  },
+  "secondaryWhois": "",
+  "secondaryRegexp": ""
 }
 
 ```

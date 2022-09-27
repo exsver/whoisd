@@ -18,7 +18,9 @@ Change the host to whatever hostname elasticsearch is running on, as well as the
     "port": 9200,
     "indexBase": "whois",
     "typeTable": "domain"
-  }
+  },
+  "secondaryWhois": "",
+  "secondaryRegexp": ""
 }
 ```
 

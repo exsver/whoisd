@@ -9,7 +9,10 @@ import (
 	"log"
 	"net"
 	"os"
+        "os/exec"
+        "regexp"
 
+        "github.com/openprovider/whoisd/pkg/config"
 	"github.com/openprovider/whoisd/pkg/storage"
 	"golang.org/x/net/idna"
 )
@@ -48,7 +51,7 @@ func (client *Record) HandleClient(channel chan<- Record) {
 }
 
 // ProcessClient - Asynchronous a client handling
-func ProcessClient(channel <-chan Record, repository *storage.Record) {
+func ProcessClient(channel <-chan Record, repository *storage.Record, conf *config.Record) {
 	message := Record{}
 	defer func() {
 		if recovery := recover(); recovery != nil {
@@ -64,9 +67,37 @@ func ProcessClient(channel <-chan Record, repository *storage.Record) {
 		if err != nil {
 			query = string(message.Query)
 		}
-		data, ok := repository.Search(query)
-		message.Conn.Write([]byte(data))
-		stdlog.Println(message.Conn.RemoteAddr().String(), query, ok)
+
+                primaryData, primaryStatus := repository.Search(query)
+                if conf.SecondaryWhois == "" || primaryStatus == true {
+                        stdlog.Println(query, "exists in primary server", primaryStatus)
+                        message.Conn.Write([]byte(primaryData))
+                        message.Conn.Close()
+                        continue;
+                }
+
+                secondaryData, err := exec.Command("whois", "-h", conf.SecondaryWhois, query).Output()
+                if err != nil {
+                        stdlog.Println(query, "error when call secondary server", err)
+                        message.Conn.Write([]byte(primaryData))
+                        message.Conn.Close()
+                        continue;
+                }
+                matched, err := regexp.Match(conf.SecondaryRegexp, secondaryData)
+                if err != nil {
+                        stdlog.Println(query, "error on analyzing secondary response", err)
+                        message.Conn.Write([]byte(primaryData))
+                        message.Conn.Close()
+                        continue;
+                }
+                if matched {
+                        stdlog.Println(query, "NOT exists in secondary server", err)
+                        message.Conn.Write([]byte(primaryData))
+                        message.Conn.Close()
+                        continue;
+                }
+                stdlog.Println(query, "exists in secondary server", err)
+		message.Conn.Write(secondaryData)
 		message.Conn.Close()
 	}
 }

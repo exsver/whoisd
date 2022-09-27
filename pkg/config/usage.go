@@ -38,6 +38,8 @@ Options:
   -spassword=<secr> Password of storage user
   -base=<name>      Storage index or database name
   -table=<name>     Storage type or table name
+  -secondaryWhois=<host> Secondary whois server
+  -secondaryRegexp=<pattern> Match pattern for not found response from the secondary whois server
 `
 
 // Usage - get usage information
